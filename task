@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main extends JFrame {
+  private JTextField numberField;
+  private JButton checkButton;
+  private JLabel resultLabel;
+
+  public Main() {
+    setTitle("Prime Number Checker");
+    setSize(400, 150);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(new FlowLayout());
+
+    numberField = new JTextField(10);
+    checkButton = new JButton("Check");
+    resultLabel = new JLabel();
+
+    add(new JLabel("Enter a number:"));
+    add(numberField);
+    add(checkButton);
+    add(resultLabel);
+
+    checkButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        int num = Integer.parseInt(numberField.getText());
+        boolean isPrime = true;
+        for (int i = 2; i <= num / 2; ++i) {
+          if (num % i == 0) {
+            isPrime = false;
+            break;
+          }
+        }
+        if (isPrime) {
+          resultLabel.setText(num + " is a prime number.");
+        } else {
+          resultLabel.setText(num + " is not a prime number.");
+        }
+      }
+    });
+
+    setVisible(true);
+  }
+
+  public static void main(String[] args) {
+    new Main();
+  }
+}
